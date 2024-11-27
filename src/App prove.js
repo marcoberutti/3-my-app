@@ -1,19 +1,15 @@
 import { useState } from "react"
-import Card from "./components prove/Card"
 import './App.css'
-import CardForm from "./components prove/CardForm"
-import Navbar from "./components prove/Navbar"
-import SubNavbar from "./components prove/SubNavbar"
-import AllVisited from "./components prove/AllVisited"
-import About from "./components prove/About"
-import Contacts from "./components prove/Contacts"
-import Subscribe from "./components prove/Subscribe"
-// import Home from "./components prove/Home"
+import Navbar from "./components prove/navbar/Navbar"
+import Home from "./components prove/home/Home"
+import About from "./components prove/about/About"
+import Contacts from "./components prove/contacts/Contacts"
+import Subscribe from "./components prove/subscribe/Subscribe"
+import Footer from "./components prove/footer/Footer"
 
 const descrizione = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
 
 function AppProve(){
-  const [filterData, setFilterData] = useState(false)
   const [cities, setCities] = useState([
     {
       id: 1,
@@ -44,88 +40,33 @@ function AppProve(){
       descrizione: descrizione
     },
   ])
-  const [allVisited, setAllVisited] = useState(false)
-  const [filteredCities, setFilteredCities] = useState(cities)
-  const [isFormVisible, setIsFormVisible]= useState(false)
+  
   const [showPage, setShowPage] = useState('Home')
-
-  const addCity = (city) => {
-    setCities([...cities, city])
-    setFilteredCities([...filteredCities, city])
-  }
-  
-  function handleFilterData(){    
-    let filteredCities = cities.filter(city => city.isVisited === true)
-    setFilteredCities(filteredCities)
-    if(filteredCities.length === cities.length){
-      setAllVisited(true)
-    }
-    setFilterData(true)
-  }
-  
-  function handleResetFilter(){
-    setFilteredCities(cities)
-    setFilterData(false)
-    setAllVisited(false)
-  }
-  
-  function handleFormVisibility(){
-    setIsFormVisible(!isFormVisible)
-  }
 
   return (
     <>
       <Navbar setShowPage={setShowPage}></Navbar>
-      { showPage === 'Home' &&
-      <>
-      <SubNavbar 
-        filterData={filterData} 
-        isFormVisible={isFormVisible}
-        handleFilterData={()=>handleFilterData()}
-        handleResetFilter={()=>handleResetFilter()}
-        handleFormVisibility={()=>handleFormVisibility()}>
-      </SubNavbar>
-      <div className="formAllVisitiedContainer">
-        {isFormVisible && <CardForm addCity={addCity} descrizione={descrizione}></CardForm>}
-        {allVisited && <AllVisited filteredCities={filteredCities}/>}
+      <div className="mainContent">
+        { showPage === 'Home' &&
+        <Home setCities={setCities} cities={cities}></Home>
+        }
+        { showPage === 'About' &&
+        <>
+        <About></About>
+        </>
+        }
+        { showPage === 'Contacts' &&
+        <>
+        <Contacts></Contacts>
+        </>
+        }
+        { showPage === 'Subscribe' &&
+        <>
+        <Subscribe></Subscribe>
+        </>
+        }
       </div>
-      <div className="cardContainer">
-        {filteredCities.map((city) => (
-          <Card
-            key={city.id}
-            isVisited={city.isVisited}
-            title={city.title}
-            imgUrl={city.imgUrl}
-            cities={cities}
-            id={city.id}
-            setFilteredCities={setFilteredCities}
-            setCities={setCities}
-            filterData={filterData}
-            filteredCities={filteredCities}
-            allVisited={allVisited}
-            setAllVisited={setAllVisited}
-          >
-          {city.descrizione}
-          </Card>)
-        )}
-      </div>
-      </>
-      }
-      { showPage === 'About' &&
-      <>
-      <About></About>
-      </>
-      }
-      { showPage === 'Contacts' &&
-      <>
-      <Contacts></Contacts>
-      </>
-      }
-      { showPage === 'Subscribe' &&
-      <>
-      <Subscribe></Subscribe>
-      </>
-      }
+      <Footer></Footer>
     </>
   )
 }

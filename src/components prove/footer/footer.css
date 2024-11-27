@@ -1,0 +1,99 @@
+.myFooter {
+  background-color: #2B3237;
+  grid-area: footer;
+  color: white;
+  padding: 0 20px;
+}
+
+.myFooter {
+  display: grid;
+  grid-template-columns: 45% 27.5% 27.5%;
+  grid-template-rows: 1fr 1fr auto;
+  grid-template-areas:
+  'descrizione links links'
+  'descrizione links links'
+  'rights rights rights'
+  ;
+  padding:  30px 170px 0px 170px;
+  row-gap: 25px;
+}
+
+.descrizioneFooter {
+  align-self: center;
+  grid-area: descrizione;
+  border-right: 1px solid white;
+}
+
+address {
+  text-align: right;
+  padding: 0 25px;
+}
+
+.linksFooter {
+  width: 100%;
+  align-self: center;
+  justify-self: center;
+  grid-area: links;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.linksFooter ul {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.linksFooter a {
+  text-decoration: none;
+  color: white;
+}
+
+.linksFooter a:hover {
+  color: gold;
+}
+
+.linksFooter li {
+  list-style-type: none;
+}
+
+.myFooter p:last-child {
+  width: 100%;
+  padding: 25px;
+  border-top: 1px solid white;
+  justify-self: center;
+  text-align: center;
+  grid-area: rights;
+  margin: 0;
+}
+
+@media (max-width:576px){
+  .myFooter {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    grid-template-areas:
+    'descrizione '
+    'links'
+    'rights'
+    ;
+    padding:  20px;
+    row-gap: 0;
+  }
+
+  .myFooter .descrizioneFooter {
+    border-right: none;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+  }
+
+  .linksFooter ul {
+    padding: 0;
+  }
+
+  .myFooter p:last-child {
+    padding: 20px 0px 5px 0px;
+    margin: 20px;
+  }
+}

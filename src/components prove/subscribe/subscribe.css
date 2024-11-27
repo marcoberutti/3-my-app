@@ -1,0 +1,19 @@
+#root{
+  width: 100% !important;
+  height: 100%;
+  background-color: #1E1F21;
+}
+
+.subscribeTitle {
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.subscribeContainer {
+  background-color: #1E1F21;
+}
+
+.subscribeLabel{
+  color: white;
+}
